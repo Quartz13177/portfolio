@@ -1,0 +1,293 @@
+/* =========================================================
+   1) CSS 변수 : 색/폰트/간격을 한 곳에서 관리
+   ========================================================= */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f4f5f7;
+  --text: #1c1f23;
+  --text-soft: #5b6470;
+  --accent: #3b6cf6;
+  --border: #e2e5ea;
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+  --font: "Segoe UI", "Malgun Gothic", sans-serif;
+  --gap: 16px;
+  --radius: 12px;
+  --max-width: 1100px;
+}
+
+/* 다크 모드 : 변수 값만 갈아끼우면 화면 전체가 바뀐다 */
+[data-theme="dark"] {
+  --bg: #14171c;
+  --bg-soft: #1d2129;
+  --text: #f1f3f5;
+  --text-soft: #a9b1bd;
+  --accent: #6f9bff;
+  --border: #2c323c;
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   2) 기본 스타일 (모바일 퍼스트)
+   ========================================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.5rem; margin-bottom: var(--gap); }
+
+.accent { color: var(--accent); }
+
+/* 고정 헤더에 가려지지 않도록 스크롤 위치 보정 */
+section { scroll-margin-top: 70px; }
+
+/* =========================================================
+   3) 헤더 / 네비게이션 (Flexbox)
+   ========================================================= */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  background: transparent;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* 스크롤 60px 이상에서 JS가 이 클래스를 붙인다 */
+.header.scrolled {
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;                  /* 로고 왼쪽, 버튼 오른쪽 */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo { font-weight: 700; letter-spacing: 2px; }
+
+/* 모바일에서는 메뉴를 숨겼다가 .active 일 때만 펼친다 */
+.nav-menu {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  display: none;
+  padding: var(--gap) 20px;
+}
+.nav-menu.active { display: block; }
+.nav-menu li { padding: 8px 0; }
+.nav-menu a:hover { color: var(--accent); }
+
+.nav-btns { display: flex; gap: 8px; }
+
+.icon-btn {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.icon-btn:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+
+/* =========================================================
+   4) 섹션 공통
+   ========================================================= */
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 64px 20px;
+}
+.section-desc { color: var(--text-soft); margin-bottom: var(--gap); }
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 0 20px;
+  background: var(--bg-soft);
+}
+.hero-hello { color: var(--text-soft); letter-spacing: 4px; }
+.hero-desc { color: var(--text-soft); max-width: 520px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* About */
+.about-box { display: flex; flex-direction: column; gap: var(--gap); }
+.profile {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+
+/* Skills */
+.skill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-list li {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+/* =========================================================
+   5) Projects (Grid + 상태별 UI)
+   ========================================================= */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--gap); }
+.filter-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.filter-btn:hover { background: var(--bg-soft); }
+.filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.card-grid {
+  display: grid;                                               /* 카드는 Grid */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* 화면 크기에 맞춰 자동 배치 */
+  gap: var(--gap);
+}
+
+.card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15); }
+.card h3 { margin-bottom: 8px; word-break: break-all; }
+.card p { color: var(--text-soft); min-height: 48px; }
+.card-meta { display: flex; gap: 12px; color: var(--text-soft); font-size: 0.9rem; margin: 10px 0; }
+.card a { color: var(--accent); font-weight: 600; }
+
+/* 로딩 / 에러 / 빈 상태 공통 박스 */
+.state-box { text-align: center; padding: 40px 0; color: var(--text-soft); }
+.spinner {
+  width: 34px; height: 34px;
+  margin: 0 auto 12px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =========================================================
+   6) 폼
+   ========================================================= */
+.form { max-width: 520px; display: flex; flex-direction: column; gap: var(--gap); }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-weight: 600; }
+.field input, .field textarea {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.field input:focus, .field textarea:focus { outline: 2px solid var(--accent); }
+.error { color: #e5484d; font-size: 0.88rem; min-height: 20px; }
+.success { color: #2e9e5b; font-weight: 600; }
+
+/* =========================================================
+   7) Footer / 맨 위로 버튼
+   ========================================================= */
+.footer {
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+  padding: 24px 20px;
+  text-align: center;
+  color: var(--text-soft);
+}
+.footer a { margin: 0 8px; }
+.footer a:hover { color: var(--accent); }
+
+.top-btn {
+  position: fixed;
+  right: 20px; bottom: 20px;
+  width: 44px; height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  opacity: 0;                 /* 평소엔 숨김 */
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.top-btn.show { opacity: 1; pointer-events: auto; }  /* 스크롤 300px 이상에서 JS가 붙임 */
+
+/* =========================================================
+   8) 스크롤 등장 애니메이션
+   ========================================================= */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* =========================================================
+   9) 반응형 : 768px(태블릿) / 1024px(데스크톱)
+   ========================================================= */
+@media (min-width: 768px) {
+  h1 { font-size: 2.6rem; }
+  h2 { font-size: 1.9rem; }
+
+  /* 데스크톱에선 메뉴를 가로로 펼치고 햄버거를 숨긴다 */
+  .nav-menu {
+    position: static;
+    display: flex;
+    gap: 24px;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .hamburger { display: none; }
+
+  .about-box { flex-direction: row; align-items: center; gap: 32px; }
+}
+
+@media (min-width: 1024px) {
+  .section { padding: 90px 20px; }
+  .profile { width: 200px; height: 200px; }
+}
