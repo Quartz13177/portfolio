@@ -8,7 +8,7 @@
    ========================================================= */
 
 /* ★ 본인 GitHub 아이디로 바꿔주세요 ★ */
-const GITHUB_USERNAME = "Quartz10";
+const GITHUB_USERNAME = "Quartz13177";
 
 const SKILLS = ["HTML", "CSS", "JavaScript", "Git", "GitHub Pages", "VS Code"];
 

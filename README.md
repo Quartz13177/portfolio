@@ -5,8 +5,8 @@
 
 ## 배포 URL
 
-- 사이트: https://quartz10.github.io/portfolio/
-- 저장소: https://github.com/Quartz10/portfolio
+- 사이트: https://quartz13177.github.io/portfolio/
+- 저장소: https://github.com/Quartz13177/portfolio
 
 ## 사용 기술
 
@@ -50,7 +50,7 @@ portfolio/
 
 1. VS Code 에서 이 폴더를 연다.
 2. `Live Server` 확장을 설치한 뒤 `index.html` 에서 **Open with Live Server** 를 실행한다.
-3. `js/app.js` 맨 위의 `GITHUB_USERNAME` 값(현재 `Quartz10`)으로 GitHub 저장소를 불러온다.
+3. `js/app.js` 맨 위의 `GITHUB_USERNAME` 값(현재 `Quartz13177`)으로 GitHub 저장소를 불러온다.
 
 ## GitHub API 주의사항
 
